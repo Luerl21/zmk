@@ -208,6 +208,10 @@ config ZMK_BLE_MOUSE_REPORT_QUEUE_SIZE
     int "Max number of mouse HID reports to queue for sending over BLE"
     default 20
 
+config ZMK_BLE_PLOVER_HID_REPORT_QUEUE_SIZE
+  int "Max number of plover HID reports to queue for sending over BLE"
+  default 5
+
 config ZMK_BLE_CLEAR_BONDS_ON_START
     bool "Configuration that clears all bond information from the keyboard on startup."
     default n
@@ -244,6 +248,13 @@ endmenu
 endmenu
 
 rsource "src/split/Kconfig"
+
+menu "Stenography Support"
+
+config ZMK_PLOVER_HID
+    bool "Support for the Plover HID Stenography Protocol"
+
+# Stenography Support
 
 #Basic Keyboard Setup
 endmenu
@@ -478,6 +489,7 @@ if ZMK_KSCAN
 config ZMK_KSCAN_EVENT_QUEUE_SIZE
     int "Size of the event queue for KSCAN events to buffer events"
     default 4
+    default 64 if ZMK_PLOVER_HID
 
 endif # ZMK_KSCAN
 
